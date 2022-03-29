@@ -4,7 +4,9 @@
 
 | Nome | Número Mecanográfico |
 | - | - |
-| David José Araújo Ferreira | 93444 |
+| David Araújo| 93444 |
+| Miguel Nogueira| 93082 |
+
 
 # Exercícios 2.1
 
@@ -24,12 +26,3 @@
 | Empresa - Produto | 2 | 1:N | Produto  |
 | Produto - Encomenda | 2 | M:N | Encomenda |
 | Encomenda - Forncedor | 2 | N:1 | Encomenda |
-
-<div style="page-break-after: always;"></div>
-
-## c)
-
-![P2-2.1](P2-2.1.png)
-
-# Exercício 2.2
-
