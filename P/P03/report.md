@@ -6,7 +6,7 @@
 | Miguel Nogueira | 93082 |
 | David Ferreira | 93444 |
 
-## Exercicio 3.1
+## Exercício 3.1
 ### a)
 
 - Cliente( <u>NIF</u>, num_carta, endereço, nome ),
@@ -38,7 +38,7 @@
 
 <div style="page-break-after: always;"></div>
 
-## Exercicio 3.2
+## Exercício 3.2
 ### a)
 
 - Airport(<u>airport_code</u>, city, state, name),
@@ -59,8 +59,8 @@
 | **Flight_leg** | leg_no <br>+ number_flight | leg_no <br>+ number_flight | number_flight <br> airport_code1 <br> airport_code2|
 | **Flight** | number | number| - |
 | **Fare** | code <br>+ number_flight | code <br>+ number_flight | number_flight |
-| **Leg_instance** | date <br>+leg_no <br>+number_flight | date <br>+leg_no <br>+number_flight| leg_no <br> number-flight <br> airplane_id <br> airport_code1 <br> airport_code2|
-| **Seat** | seat_no <br>+ date <br>+ leg_no <br>+ number_flight | seat_no <br>+ date <br>+ leg_no <br>+ number_flight | data <br> leg_no <br> number_flight <br> |
+| **Leg_instance** | date <br>+leg_no <br>+number_flight | date <br>+leg_no <br>+number_flight| leg_no <br> number_flight <br> airplane_id <br> airport_code1 <br> airport_code2|
+| **Seat** | seat_no <br>+ date <br>+ leg_no <br>+ number_flight | seat_no <br>+ date <br>+ leg_no <br>+ number_flight | date <br> leg_no <br> number_flight <br> |
 | **Airplane** | airplane_id | airplane_id | type_name |
 | **Airplane_type** | type_name | type_name | - |
 | **Can_land** | type_name <br>+ airport_code | type_name <br>+ airport_code | type_name <br> airport_code|
@@ -69,3 +69,8 @@
 
 ### c)
 
+![P03-3.2.drawio.png](P03-3.2.drawio.png)
+
+## Exercício 3.3
+
+## Lab 02 2.1
