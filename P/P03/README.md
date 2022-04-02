@@ -1,4 +1,4 @@
-# P03
+# Lab03
 ## Grupo - **P2G2**
 
 | Membros | Número Mecanográfico |
