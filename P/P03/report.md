@@ -71,6 +71,31 @@
 
 ![P03-3.2.drawio.png](P03-3.2.drawio.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Exercício 3.3
 
 ## Lab 02 2.1
+
+![P03-3.3_2.1.drawio.png](P03-3.3_2.1.drawio.png)
+
+<div style="page-break-after: always;"></div>
+
+## Lab 02 2.2
+
+![P03-3.3_2.2.drawio.png](P03-3.3_2.2.drawio.png)
+
+<div style="page-break-after: always;"></div>
+
+## Lab 02 2.3
+
+![P03-3.3_2.3.drawio.png](P03-3.3_2.3.drawio.png)
+
+<div style="page-break-after: always;"></div>
+
+
+## Lab 02 2.4
+
+![P03-3.3_2.4.drawio.png](P03-3.3_2.4.drawio.png)
+
+<div style="page-break-after: always;"></div>
