@@ -14,26 +14,6 @@ CREATE TABLE Filiate (
 	Address VARCHAR(8) CHECK (Address LIKE '^[0-9]{4}-[0-9]{3}$'),
 	PRIMARY KEY(Num)
 );
-CREATE TABLE Rented (
-	Num INT NOT NULL,
-	Duration INT CHECK(Duration > 0),
-	Date DATETIME,
-	Client_NIF INT,
-	Filiate_Num INT,
-	Car_plate VARCHAR(6),
-	PRIMARY KEY(Num),
-	FOREIGN KEY(Client_NIF) REFERENCES Client(NIF),
-	FOREIGN KEY(Filiate_Num) REFERENCES Filiate(Num),
-	FOREIGN KEY(Car_Plate) REFERENCES Car(Plate),
-);
-CREATE TABLE Car (
-	Plate VARCHAR(6) NOT NULL,
-	Automaker VARCHAR(50),
-	Year_make DATE,
-	Type_code VARCHAR(50),
-	PRIMARY KEY(Plate),
-	FOREIGN KEY(Type_code) REFERENCES TypeCar(Code),
-);
 CREATE TABLE TypeCar (
 	Code VARCHAR(50) NOT NULL,
 	Designation VARHCAR(50),
@@ -48,6 +28,26 @@ CREATE TABLE Similar(
 	scn_code VARCHAR(50) NOT NULL,
 	FOREIGN KEY(frs_code, scn_code) REFERENCES TypeCar(Code)
 );
+CREATE TABLE Car (
+	Plate VARCHAR(6) NOT NULL,
+	Automaker VARCHAR(50),
+	Year_make DATE,
+	Type_code VARCHAR(50),
+	PRIMARY KEY(Plate),
+	FOREIGN KEY(Type_code) REFERENCES TypeCar(Code),
+);
+CREATE TABLE Rented (
+	Num INT NOT NULL,
+	Duration INT CHECK(Duration > 0),
+	Date DATETIME,
+	Client_NIF INT,
+	Filiate_Num INT,
+	Car_plate VARCHAR(6),
+	PRIMARY KEY(Num),
+	FOREIGN KEY(Client_NIF) REFERENCES Client(NIF),
+	FOREIGN KEY(Filiate_Num) REFERENCES Filiate(Num),
+	FOREIGN KEY(Car_Plate) REFERENCES Car(Plate),
+);
 CREATE TABLE Light(
 	N_seats INT CHECK (
 		N_seats >= 0
@@ -55,6 +55,7 @@ CREATE TABLE Light(
 	),
 	N_doors INT,
 	Fuel INT CHECK (
+		/*Using UN codes for hazardous materials*/
 		Fuel >= 1
 		AND Fuel <= 3600
 	),
