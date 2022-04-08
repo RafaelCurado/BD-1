@@ -1,32 +1,40 @@
-CREATE SCHEMA Lab04_01;
-CREATE TABLE Client (
+IF (
+	NOT EXISTS (
+		SELECT *
+		FROM sys.schemas
+		WHERE name = 'RentACar'
+	)
+) BEGIN EXEC ('CREATE SCHEMA [RentACar] AUTHORIZATION [dbo]')
+END CREATE TABLE Client (
 	NIF INT NOT NULL CHECK (
 		NIF BETWEEN 100000000 AND 999999999
 	),
 	Name VARCHAR(50) NOT NULL,
-	Address VARCHAR(8) CHECK (Address LIKE '^[0-9]{4}-[0-9]{3}$'),
+	Address VARCHAR(8) CHECK (Address LIKE '^[0-9]{4}-[0-9]{3}'),
 	NLicense INT,
 	PRIMARY KEY(NIF),
 );
 CREATE TABLE Filiate (
 	Num INT NOT NULL,
 	Name VARCHAR(50) NOT NULL,
-	Address VARCHAR(8) CHECK (Address LIKE '^[0-9]{4}-[0-9]{3}$'),
+	Address VARCHAR(8) CHECK (Address LIKE '^[0-9]{4}-[0-9]{3}'),
 	PRIMARY KEY(Num)
 );
 CREATE TABLE TypeCar (
 	Code VARCHAR(50) NOT NULL,
-	Designation VARHCAR(50),
+	Designation VARCHAR(50),
 	A_R INT CHECK (
-		A_R == 0
-		OR A_R == 1
+		A_R = 0
+		OR A_R = 1
 	),
-	PRIMARY KEY(Plate),
+	PRIMARY KEY(Code),
 );
 CREATE TABLE Similar(
 	frs_code VARCHAR(50) NOT NULL,
 	scn_code VARCHAR(50) NOT NULL,
-	FOREIGN KEY(frs_code, scn_code) REFERENCES TypeCar(Code)
+	PRIMARY KEY(frs_code, scn_code),
+	FOREIGN KEY(frs_code) REFERENCES TypeCar(Code),
+	FOREIGN KEY(scn_code) REFERENCES TypeCar(Code),
 );
 CREATE TABLE Car (
 	Plate VARCHAR(6) NOT NULL,
@@ -60,14 +68,16 @@ CREATE TABLE Light(
 		AND Fuel <= 3600
 	),
 	Type_code VARCHAR(50),
-	FOREIGN KEY(Type_code) REFERENCES TypeCar(Code);
+	PRIMARY KEY(Type_code),
+	FOREIGN KEY(Type_code) REFERENCES TypeCar(Code),
 );
 CREATE TABLE Heavy(
 	Pass INT NOT NULL CHECK (
-		Pass == 0
-		OR Pass == 1
+		Pass = 0
+		OR Pass = 1
 	),
 	W_eight INT NOT NULL CHECK (W_eight > 3500),
 	Type_code VARCHAR(50),
-	FOREIGN KEY(Type_code) REFERENCES TypeCar(Code);
+	PRIMARY KEY(Type_code),
+	FOREIGN KEY(Type_code) REFERENCES TypeCar(Code),
 );
