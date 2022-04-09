@@ -1,10 +1,5 @@
-IF (
-    NOT EXISTS (
-        SELECT *
-        FROM sys.schemas
-        WHERE name = 'Stock'
-    )
-) BEGIN EXEC ('CREATE SCHEMA [Stock] AUTHORIZATION [dbo]');
+CREATE SCHEMA Conferencia;
+GO
 CREATE TABLE Instituicao(
     Nome VARCHAR(50) NOT NULL,
     Morada VARCHAR(8) NOT NULL CHECK (Morada LIKE '^[0-9]{4}-[0-9]{3}'),

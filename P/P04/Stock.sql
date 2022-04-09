@@ -1,10 +1,5 @@
-IF (
-    NOT EXISTS (
-        SELECT *
-        FROM sys.schemas
-        WHERE name = 'Stock'
-    )
-) BEGIN EXEC ('CREATE SCHEMA [Stock] AUTHORIZATION [dbo]');
+CREATE SCHEMA Stock;
+GO
 CREATE TABLE Empresa(
     NIF INT NOT NULL CHECK (
         NIF BETWEEN 100000000 AND 999999999
