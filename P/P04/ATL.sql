@@ -1,0 +1,87 @@
+CREATE SCHEMA ATL;
+GO
+CREATE TABLE Encarregado(
+    Email VARCHAR(50) CHECK (Email LIKE '[a-zA-Z_-0-9]+@[a-Z]+.[a-z]+'),
+    Nome VARCHAR(50) NOT NULL,
+    Morada VARCHAR(8) CHECK (Morada LIKE '^[0-9]{4}-[0-9]{3}'),
+    Telefone VARCHAR(9) CHECK (Telefone LIKE '[0-9]{9}'),
+    Data_nasc DATE NOT NULL,
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    PRIMARY KEY(NCC)
+);
+CREATE TABLE PessoaAut(
+    Email VARCHAR(50) CHECK (Email LIKE '[a-zA-Z_-0-9]+@[a-Z]+.[a-z]+'),
+    Nome VARCHAR(50) NOT NULL,
+    Morada VARCHAR(8) CHECK (Morada LIKE '^[0-9]{4}-[0-9]{3}'),
+    Telefone VARCHAR(9) CHECK (Telefone LIKE '[0-9]{9}'),
+    Data_nasc DATE NOT NULL,
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    PRIMARY KEY(NCC)
+);
+CREATE TABLE Aluno(
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    Nome VARCHAR(50) NOT NULL,
+    Morada VARCHAR(8) CHECK (Morada LIKE '^[0-9]{4}-[0-9]{3}'),
+    Data_nasc DATE NOT NULL,
+    PRIMARY KEY(NCC),
+    FOREIGN KEY(NCC) REFERENCES Encarregado(NCC),
+);
+CREATE TABLE EntLev(
+    NCCa VARCHAR(8) NOT NULL CHECK (NCCa LIKE '[0-9]{8}'),
+    NCCp VARCHAR(8) NOT NULL CHECK (NCCp LIKE '[0-9]{8}'),
+    PRIMARY KEY(NCCa, NCCp),
+    FOREIGN KEY(NCCa) REFERENCES Aluno(NCC),
+    FOREIGN KEY(NCCp) REFERENCES PessoaAut(NCC),
+);
+CREATE TABLE Atividade(
+    ID VARCHAR(50) NOT NULL,
+    Designacao VARCHAR(50),
+    Custo MONEY NOT NULL CHECK(Custo >= 0),
+    PRIMARY KEY(ID),
+);
+CREATE TABLE Frequenta(
+    ID VARCHAR(50) NOT NULL,
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    PRIMARY KEY(ID, NCC),
+    FOREIGN KEY(ID) REFERENCES Atividade(ID),
+    FOREIGN KEY(NCC) REFERENCES Aluno(NCC),
+);
+CREATE TABLE Professor(
+    ID INT NOT NULL,
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    Nome VARCHAR(50) NOT NULL,
+    Telefone VARCHAR(9) CHECK (Telefone LIKE '[0-9]{9}'),
+    Data_nasc DATE NOT NULL,
+    Email VARCHAR(50) CHECK (Email LIKE '[a-zA-Z_-0-9]+@[a-Z]+.[a-z]+'),
+    Morada VARCHAR(8) CHECK (Morada LIKE '^[0-9]{4}-[0-9]{3}'),
+    PRIMARY KEY(ID, NCC),
+);
+CREATE TABLE Turma(
+    ID VARCHAR(50) NOT NULL,
+    Designacao VARCHAR(50),
+    Max_al INT CHECK(Max_al > 0),
+    IDp INT NOT NULL,
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    PRIMARY KEY(ID),
+    FOREIGN KEY(IDp, NCC) REFERENCES Professor(ID, NCC),
+);
+CREATE TABLE AnoLetivo(
+    ID VARCHAR(50) NOT NULL,
+    Ano DATE NOT NULL,
+    PRIMARY KEY(ID, Ano),
+    FOREIGN KEY(ID) REFERENCES Turma(ID),
+);
+CREATE TABLE Tem(
+    IDt VARCHAR(50) NOT NULL,
+    IDa VARCHAR(50) NOT NULL,
+    PRIMARY KEY(IDa, IDt),
+    FOREIGN KEY(IDt) REFERENCES Turma(ID),
+    FOREIGN KEY(IDa) REFERENCES Atividade(ID),
+);
+CREATE TABLE Inclui(
+    IDt VARCHAR(50) NOT NULL,
+    NCC VARCHAR(8) NOT NULL CHECK (NCC LIKE '[0-9]{8}'),
+    PRIMARY KEY(IDt, NCC),
+    FOREIGN KEY(IDt) REFERENCES Turma(ID),
+    FOREIGN KEY(NCC) REFERENCES Aluno(NCC),
+);
