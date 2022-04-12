@@ -82,3 +82,76 @@ ON employee.Ssn = a.Essn
 ![ex1_d](ex1_d.png)
 
 <div style="page-break-after: always;"></div>
+
+### e)
+
+>π employee.Fname, employee.Minit, employee.Lname employee ⟕ Ssn = Essn works_on
+````SQL
+SELECT employee.Fname, employee.Minit, employee.Lname
+FROM employee
+LEFT JOIN works_on
+ON Ssn=Essn
+WHERE Essn IS NULL;
+````
+
+![ex1_e](ex1_e.png)
+
+<div style="page-break-after: always;"></div>
+
+### f)
+
+>π department.Dname, AVGSalary, employee.Sex γ department.Dname, employee.Sex; AVG(employee.Salary)→AVGSalary department ⨝ employee.Dno = department.Dnumber employee
+````SQL
+SELECT department.Dname, AVG(employee.Salary) AS AVGSalary, employee.Sex
+FROM department
+INNER JOIN employee
+ON employee.Dno=department.Dnumber
+GROUP BY department.Dname, employee.Sex;
+````
+
+![ex1_f](ex1_f.png)
+
+<div style="page-break-after: always;"></div>
+
+### g)
+
+>π employee.Fname, employee.Minit, employee.Lname, e.Ndependents σ e.Ndependents > 2 employee ⨝ employee.Ssn = e.Essn ρ e π dependent.Essn, Ndependents γ Essn; COUNT(Essn)→Ndependents dependent
+````SQL
+SELECT employee.Fname, employee.Minit, employee.Lname, e.Ndependents
+FROM employee
+INNER JOIN (
+ SELECT dependent.*, COUNT(Essn) AS Ndependents
+ FROM dependent
+ GROUP BY Essn
+) AS e
+ON employee.Ssn = e.Essn
+WHERE e.Ndependents>2;
+````
+
+![ex1_g](ex1_g.png)
+
+<div style="page-break-after: always;"></div>
+
+### h)
+
+>
+
+````SQL
+
+````
+
+![ex1_h](ex1_h.png)
+
+<div style="page-break-after: always;"></div>
+
+### i)
+
+>
+
+````SQL
+
+````
+
+![ex1_i](ex1_i.png)
+
+<div style="page-break-after: always;"></div>
