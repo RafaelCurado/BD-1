@@ -134,10 +134,19 @@ WHERE e.Ndependents>2;
 
 ### h)
 
->
-
+>π emp.Fname, emp.Minit, emp.Lname, emp.Ssn, department.Dname department ⨝ department.Mgr_ssn = emp.Ssn ρ emp π Fname, Minit, Lname, Ssn σ Essn = null employee ⟕ Essn = Ssn dependent
 ````SQL
-
+SELECT emp.*, department.Dname
+FROM department
+INNER JOIN (
+ SELECT Fname, Minit, Lname, Ssn
+ FROM employee
+ LEFT JOIN dependent
+ ON Essn=Ssn
+ WHERE Essn IS NULL
+) 
+AS emp
+ON department.Mgr_ssn=emp.Ssn;
 ````
 
 ![ex1_h](ex1_h.png)
@@ -146,10 +155,33 @@ WHERE e.Ndependents>2;
 
 ### i)
 
->
-
+>π wpre.Fname, wpre.Minit, wpre.Lname, wpre.Pname, wpre.Plocation, dept_location.Dlocation σ dept_location.Dlocation ≠ 'Aveiro' dept_location ⨝ wpre.Dno = dept_location.Dnumber ρ wpre π employee.Fname, employee.Minit, employee.Lname, employee.Dno, wpr.Pname, wpr.Plocation employee ⨝ wpr.Essn = employee.Ssn ρ wpr π Essn, proj.Plocation, proj.Pname works_on ⨝ works_on.Pno = proj.Pnumber ρ proj π Pnumber, Plocation, Pname σ Plocation = 'Aveiro' project
 ````SQL
-
+SELECT wpre.Fname, wpre.Minit, wpre.Lname, wpre.Address
+FROM dept_location
+INNER JOIN (
+    SELECT 
+        employee.Fname,
+        employee.Minit,
+        employee.Lname,
+        employee.Address,
+        employee.Dno,
+        employee.Ssn
+    FROM employee
+    INNER JOIN (
+        SELECT Essn, proj.Plocation, proj.Pname
+        FROM works_on
+        INNER JOIN (
+            SELECT Pnumber, Plocation, Pname
+            FROM project
+            WHERE Plocation='Aveiro')
+        AS proj
+        ON works_on.Pno=proj.Pnumber)
+    AS wpr
+    ON wpr.Essn=employee.Ssn)
+AS wpre
+ON wpre.Dno=dept_location.Dnumber
+WHERE dept_location.Dlocation!='Aveiro'
 ````
 
 ![ex1_i](ex1_i.png)
