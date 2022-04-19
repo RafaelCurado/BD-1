@@ -1,10 +1,9 @@
-# Gestão de Festivais Musicais
+# <t style="color:#0080ff">Gestor de Festivias Musicais</t>
 
-## Proposta de Projeto para Base de Dados
-## <t style="color:#0080ff">Gestor de Festivias Musicais</t> - **P2G2**
+## Proposta de Projeto para Base de Dados - **P2G2**
 
-- David Araújo 93444
-- Miguel Nogueira 93082
+- David Araújo - 93444
+- Miguel Nogueira - 93082
 
 ## Requisitos
 
@@ -18,6 +17,7 @@ Os utilizadores serão capazes de interagir com o sistema da seguinte forma:
 - Associar/Dessasociar concertos a palcos.
 - Inserir/Remover informação relativamente às refeições e empreas de Catering.
 - Confirgurar toda a informação do evento em si, assim como consultá-la.
+- Inserir/Remover bandas, associa-las a concertos.
 
 <div style="page-break-after: always;"></div>
 
