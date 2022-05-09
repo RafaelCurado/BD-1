@@ -1,0 +1,1 @@
+DROP TABLE Presc_farmaco;DROP TABLE Prescricao;DROP TABLE Farmaco;DROP TABLE Farmaceutica;DROP TABLE Medico;DROP TABLE Paciente;DROP TABLE Farmacia;DROP SCHEMA Medicamentos;
