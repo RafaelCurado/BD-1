@@ -1,11 +1,5 @@
-SELECT	titles.title,
-		ss.stor_name
-FROM	titles
-LEFT JOIN	(
-	SELECT	sales.title_id,
-			stor_name
-	FROM	sales
-	INNER JOIN	stores
-	ON	sales.stor_id = stores.stor_id
-) AS ss
-ON	ss.title_id=titles.title_id 
+SELECT stor_name, COUNT(DISTINCT title) as different
+FROM stores, sales, titles
+WHERE stores.stor_id = sales.stor_id AND sales.title_id = titles.title_id
+GROUP BY stor_name
+HAVING COUNT(DISTINCT title) = (SELECT COUNT(title) FROM titles)
